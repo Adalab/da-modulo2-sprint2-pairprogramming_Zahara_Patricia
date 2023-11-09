@@ -29,6 +29,11 @@ SELECT product_name, units_in_stock
 FROM products
 WHERE units_in_stock <1;
 
+-- *5* _Zahara_ Otra versión
+SELECT discontinued
+FROM products
+WHERE discontinued = 1;
+
 /*6*/
 SELECT product_name, product_id
 FROM products
@@ -41,6 +46,35 @@ SELECT employee_id, order_id AS pedido_mas_pesado, freight, COUNT(order_id) AS n
 FROM orders
 GROUP BY employee_id
 HAVING MAX(freight);
+
+-- _Zahara_ 
+SELECT employee_id, COUNT(order_id) AS Num_pedidos, 
+	MAX(freight) AS pedido_mas_pesado
+	FROM orders
+	GROUP BY employee_id;
+
+/*8*/ 
+SELECT employee_id , COUNT(order_id) AS Num_pedidos, 
+	MAX(freight) AS pedido_mas_pesado
+	FROM orders
+	WHERE shipped_date IS NOT NULL
+	GROUP BY employee_id;
+
+/*9*/
+SELECT	DAY(order_date) AS Dia, 
+		MONTH(order_date) AS Mes, 
+        YEAR(order_date) AS Año, COUNT(order_id)
+	FROM orders
+	GROUP BY Dia, Mes, Año; 
+	-- ORDER BY Año; No se ordena 
+
+/*10*/
+SELECT 	MONTH (order_date) AS Mes, 
+		YEAR (order_date) AS Año, 
+        COUNT(order_id) AS numero_de_pedidos
+	FROM orders
+	GROUP BY Mes, Año;
+
 
 /*11*/
 SELECT city, COUNT(city) AS total_empleadas
