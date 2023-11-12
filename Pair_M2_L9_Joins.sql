@@ -36,8 +36,17 @@ SELECT `c`.`company_name` AS `NombreEmpresa`, `c`.`customer_id` AS `Identificado
 	Lo siguiente que nos han pedido es la misma consulta anterior pero con la adición de la cantidad de dinero que han pedido por esa 
 	cantidad de objetos, teniendo en cuenta los descuentos, etc. Ojo que los descuentos en nuestra tabla nos salen en porcentajes, 
 	15% nos sale como 0.15.*/
+
+
+	# SELECT `c`.`company_name`AS `NombreEmpresa`, YEAR(`o`.`order_date`) AS `Año`, SUM(`od`.`quantity`) AS `NumObjetos`, SUM(`od`.`unit_price`*0.15,`od`.`unit_price`-(`od`.`unit_price`*0.15) * `od`.`quantity`) AS `DineroTotal`
+    SELECT `c`.`company_name`AS `NombreEmpresa`, YEAR(`o`.`order_date`) AS `Año`, SUM(`od`.`quantity`) AS `NumObjetos`, SUM(`od`.`unit_price` * `od`.`quantity` - (`od`.`unit_price` * `od`.`quantity`)- `od`.`discount`) AS `DineroTotal`
+		FROM `customers` AS `c`
+		INNER JOIN `orders` AS `o`
+		INNER JOIN `order_details` AS `od`
+		WHERE `c`.`country` = "UK"
+		GROUP BY `Año`,`NombreEmpresa`;
  
- 
+
  
  /*4. BONUS: Pedidos que han realizado cada compañía y su fecha:
 	Después de estas solicitudes desde UK y gracias a la utilidad de los resultados que se han obtenido, desde la central nos han
