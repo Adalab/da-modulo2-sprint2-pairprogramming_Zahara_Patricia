@@ -52,7 +52,10 @@ SELECT `c`.`company_name` AS `NombreEmpresa`, `c`.`customer_id` AS `Identificado
 	Después de estas solicitudes desde UK y gracias a la utilidad de los resultados que se han obtenido, desde la central nos han
 	pedido una consulta que indique el nombre de cada compañia cliente junto con cada pedido que han realizado y su fecha.*/
     
-    
+    SELECT company_name, o.order_id, order_date, country
+		FROM customers AS `c`
+		INNER JOIN orders AS `o`
+		ON c.customer_id = o.customer_id;
     
 /*5. BONUS: Tipos de producto vendidos:
 	Ahora nos piden una lista con cada tipo de producto que se han vendido, sus categorías, nombre de la categoría y el nombre del producto,
