@@ -39,7 +39,7 @@ SELECT `c`.`company_name` AS `NombreEmpresa`, `c`.`customer_id` AS `Identificado
 
 
 	# SELECT `c`.`company_name`AS `NombreEmpresa`, YEAR(`o`.`order_date`) AS `Año`, SUM(`od`.`quantity`) AS `NumObjetos`, SUM(`od`.`unit_price`*0.15,`od`.`unit_price`-(`od`.`unit_price`*0.15) * `od`.`quantity`) AS `DineroTotal`
-    SELECT `c`.`company_name`AS `NombreEmpresa`, YEAR(`o`.`order_date`) AS `Año`, SUM(`od`.`quantity`) AS `NumObjetos`, SUM(`od`.`unit_price` * `od`.`quantity` - (`od`.`unit_price` * `od`.`quantity`)- `od`.`discount`) AS `DineroTotal`
+    SELECT `c`.`company_name`AS `NombreEmpresa`, YEAR(`o`.`order_date`) AS `Año`, SUM(`od`.`quantity`) AS `NumObjetos`, SUM(`od`.`unit_price` * `od`.`quantity`- `od`.`discount`) AS `DineroTotal`
 		FROM `customers` AS `c`
 		INNER JOIN `orders` AS `o`
 		INNER JOIN `order_details` AS `od`
