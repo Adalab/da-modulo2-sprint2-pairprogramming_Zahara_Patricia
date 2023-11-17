@@ -24,11 +24,7 @@ FROM products
 WHERE unit_price > 28.87
 ORDER BY unit_price DESC;
 
-/*5*  REVISAR, NO ESTOY USANDO BOOLEANO ¿?*/
-SELECT product_name, units_in_stock
-FROM products
-WHERE units_in_stock <1;
-
+/*5*/
 -- *5* _Zahara_ Otra versión
 SELECT discontinued
 FROM products

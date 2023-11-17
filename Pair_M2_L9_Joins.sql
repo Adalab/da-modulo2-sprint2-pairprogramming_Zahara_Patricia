@@ -102,7 +102,7 @@ SELECT `c`.`company_name` AS `NombreEmpresa`, `c`.`customer_id` AS `Identificado
 		WHERE `c`.`country` = 'UK';         
         
  
-/*9. Empleadas que sean de la misma ciudad: TIENE ERROR!!!!!!
+/*9. Empleadas que sean de la misma ciudad:
 	Ejercicio de SELF JOIN: Desde recursos humanos nos piden realizar una consulta que muestre por pantalla los datos de todas las 
 	empleadas y sus supervisoras. Concretamente nos piden: la ubicación, nombre, y apellido tanto de las empleadas como de las jefas.
 	Investiga el resultado, ¿sabes decir quién es el director?*/
@@ -110,33 +110,31 @@ SELECT `c`.`company_name` AS `NombreEmpresa`, `c`.`customer_id` AS `Identificado
      b.first_name AS `Nombre Supervisora`,b.last_name AS `Apellido Supervisora`
 		 FROM employees AS a
 		 JOIN employees AS b
-		 ON a.employee_id = b.reports_to;
+		 ON a.reports_to = b.employee_id;
  
 
-/*10.BONUS: FULL OUTER JOIN Pedidos y empresas con pedidos asociados o no: TIENE ERROR!!!!!!!!
+/*10.BONUS: FULL OUTER JOIN Pedidos y empresas con pedidos asociados o no:
 	Selecciona todos los pedidos, tengan empresa asociada o no, y todas las empresas tengan pedidos asociados o no. 
     Muestra el ID del pedido, el nombre de la empresa y la fecha del pedido (si existe).*/
- SELECT o.order_id, o.order_date, c.company_name
- FROM orders AS o
- LEFT JOIN customers AS c
- ON o.customer_id = c.customer_id
- UNION
- SELECT o.order_id, o.order_date, c.company_name
- FROM orders AS o
- RIGHT JOIN customers AS c
- ON o.customer_id = c.customer_id;
+	SELECT o.order_id, o.order_date, c.company_name
+		FROM orders AS o RIGHT JOIN customers AS c
+		ON o.customer_id = c.customer_id
+		WHERE c.country = 'UK'
+	UNION
+	SELECT o.order_id, o.order_date, c.company_name
+		FROM orders AS o LEFT JOIN customers AS c
+		ON o.customer_id = c.customer_id
+		WHERE c.country = 'UK';
  
-SELECT c.company_name, o.order_date, o.order_id
- FROM orders AS o
- LEFT JOIN customers AS c
- ON o.customer_id = c.customer_id
- UNION
- SELECT o.order_id, o.order_date, c.company_name
- FROM orders AS o
- RIGHT JOIN customers AS c
- ON o.customer_id = c.customer_id;
- 
- 
+ SELECT o.order_id, c.company_name
+		FROM customers AS c LEFT JOIN orders AS o
+		ON o.customer_id = c.customer_id
+		WHERE c.country = 'UK'
+	UNION
+	SELECT o.order_id, c.company_name
+		FROM orders AS o LEFT JOIN customers AS c
+		ON o.customer_id = c.customer_id
+		WHERE c.country = 'UK';
  
  
  
