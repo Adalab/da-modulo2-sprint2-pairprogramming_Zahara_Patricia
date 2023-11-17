@@ -43,7 +43,10 @@ SELECT order_id, customer_id
 /*6. Extraed los 10 productos más caros.
 Nos siguen pidiendo más queries correlacionadas. En este caso queremos saber cuáles son los 10 productos más caros.*/
 
-
+SELECT `product_name` AS `productos_mas_caros`, `unit_price`AS `precio_unidad`
+	From `products`
+    ORDER BY`unit_price` DESC
+	LIMIT 10;
 
 
 

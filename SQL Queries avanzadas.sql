@@ -25,7 +25,7 @@ WHERE unit_price > 28.87
 ORDER BY unit_price DESC;
 
 /*5*/
--- *5* _Zahara_ Otra versión
+
 SELECT discontinued
 FROM products
 WHERE discontinued = 1;
@@ -62,7 +62,6 @@ SELECT	DAY(order_date) AS Dia,
         YEAR(order_date) AS Año, COUNT(order_id)
 	FROM orders
 	GROUP BY Dia, Mes, Año; 
-	-- ORDER BY Año; No se ordena 
 
 /*10*/
 SELECT 	MONTH (order_date) AS Mes, 
